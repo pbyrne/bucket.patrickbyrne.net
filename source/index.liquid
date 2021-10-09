@@ -2,4 +2,29 @@
 layout: layout
 ---
 
-<h1>Here it is!</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Thumbnail</th>
+      <th>Date</th>
+    <tr>
+  </thead>
+  <tbody>
+    {% for image in bucket.images %}
+      <tr data-name="{{ image.name }}" data-type="{{ image.type }}">
+        <td>
+          <a href="/{{ image.name }}">{{ image.name }}</a>
+        </td>
+
+        <td>
+          <img src="{{ image.thumbnail.url }}" width="{{ image.thumbnail.width }}" height="{{ image.thumbnail.height }}">
+        </td>
+
+        <td>
+          {{ image.date | date: "%Y-%m-%d" }}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
