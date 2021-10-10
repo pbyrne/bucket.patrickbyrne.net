@@ -1,0 +1,19 @@
+[build]
+publish = "_site"
+
+[build.environment]
+NODE_VERSION = "16.4.0"
+
+[build.processing]
+skip_processing = false
+
+[build.processing.css]
+bundle = true
+minify = false
+
+[build.processing.js]
+bundle = true
+minify = false
+
+[build.processing.images]
+compress = true
