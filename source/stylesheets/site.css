@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.images--filter {
+  @apply m-4;
+
+  & label {
+    @apply hidden;
+  }
+}
+
+.images--container {
+  @apply m-4;
+
+  & th {
+    @apply text-left;
+  }
+}
