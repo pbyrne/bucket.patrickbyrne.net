@@ -54,7 +54,7 @@ class Bucket {
   images = []
   selectOptions = {
     sort: [{field: "Name", direction: "asc"}],
-    // maxRecords: 5,
+    // maxRecords: 20,
   }
   tableName
 

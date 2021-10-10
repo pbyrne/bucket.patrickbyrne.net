@@ -5,16 +5,22 @@ layout: layout
 <form class="images--filter invisible">
   <fieldset>
     <label for="filter">Filter images</label>
-    <input id="filter" name="filter" data-action="filter" placeholder="Filter images"/>
+    <input
+      class="images--filter-input"
+      data-action="filter"
+      id="filter"
+      name="filter"
+      placeholder="Filter images"
+      />
   </fieldset>
 </form>
 
 <table class="images--container">
   <thead>
     <tr>
-      <th>Name</th>
+      <th class="images--sort-trigger" data-sorted="asc">Name</th>
       <th>Thumbnail</th>
-      <th>Date</th>
+      <th class="images--sort-trigger">Date</th>
     </tr>
   </thead>
   <tbody>
