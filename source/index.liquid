@@ -18,7 +18,11 @@ layout: layout
         </td>
 
         <td>
-          <img src="{{ image.thumbnail.url }}" width="{{ image.thumbnail.width }}" height="{{ image.thumbnail.height }}">
+          <img src="{{ image.thumbnail.url }}"
+               loading="lazy"
+               width="{{ image.thumbnail.width }}"
+               height="{{ image.thumbnail.height }}"
+               >
         </td>
 
         <td>
