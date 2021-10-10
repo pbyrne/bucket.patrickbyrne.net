@@ -1,11 +1,14 @@
 export default class Bucketeer {
+  filter
+  images
+  sorters
+  defaultQueryValue
+
   constructor({filter, images, sorters} = {}) {
     this.filter = document.querySelector(filter)
     this.images = document.querySelectorAll(images)
     this.sorters = document.querySelectorAll(sorters)
-
-    // on-load behavior
-    this.filter.form.classList.remove("invisible")
+    this.defaultQueryValue = (new URL(window.location)).searchParams.get("filter")
 
     // event bindings
     this.filter.addEventListener("input", this.triggerFilter.bind(this))
@@ -13,6 +16,13 @@ export default class Bucketeer {
       sorter.classList.add("cursor-pointer")
       sorter.addEventListener("click", this.triggerSort.bind(this))
     })
+
+    // on-load behavior
+    this.filter.form.classList.remove("invisible")
+    if (this.defaultQueryValue) {
+      this.filter.value = this.defaultQueryValue
+      this.filter.dispatchEvent(new Event("input")) // TODO: Understand why `.value=` doesn't trigger change event
+    }
   }
 
   // "asdf" to /a.*s.*d.*f/
@@ -21,9 +31,17 @@ export default class Bucketeer {
     return new RegExp(pieces.join(".*"), "i")
   }
 
+  set queryValueFromURL(value) {
+    window.history.pushState({filter: value}, document.title, `/?filter=${value}`)
+  }
+
   triggerFilter(event) {
-    const input = event.target
-    const fuzzyFinder = this.fuzzyRegExp(input.value)
+    this.filterBy(event.target.value)
+  }
+
+  filterBy(value) {
+    this.queryValueFromURL = value
+    const fuzzyFinder = this.fuzzyRegExp(value)
     this.images.forEach((image) => {
       const name = image.dataset.name
 
@@ -46,10 +64,8 @@ export default class Bucketeer {
     Array.from(this.images)
       .sort((row1, row2) => {
         // TODO use a data attibute instead of innerHTML?
-        const row1Value = row1.children[headingIndex].innerHTML.trim().toLowerCase()
+        const row1Value = row1.children.innerHTML.trim().toLowerCase()
         const row2Value = row2.children[headingIndex].innerHTML.trim().toLowerCase()
-
-        // console.log("Comparing", {row1Value, row2Value, currentSort, newSort, gte: row1Value >= row2Value, lt: row1Value < row2Value})
 
         if (row1Value > row2Value) {
           return newSort === "asc" ? 1 : -1
