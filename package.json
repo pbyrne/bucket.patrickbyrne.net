@@ -14,7 +14,7 @@
     "build": "npm-run-all clean build:*",
     "build:eleventy": "npx @11ty/eleventy",
     "build:postcss": "npx postcss source/stylesheets --config config/postcss.config.js --dir _site/stylesheets/",
-    "build:esbuild": "npx esbuild --outdir=_site/javascripts/ source/javascripts/*",
+    "build:esbuild": "npx esbuild --bundle --outdir=_site/javascripts/ source/javascripts/*",
     "clean": "rm -rf _site",
     "serve": "npm-run-all clean --parallel serve:*",
     "serve:eleventy": "npx @11ty/eleventy --serve",
