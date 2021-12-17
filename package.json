@@ -14,12 +14,12 @@
   "scripts": {
     "build": "npm-run-all clean build:*",
     "build:eleventy": "npx @11ty/eleventy",
-    "build:postcss": "npx postcss source/stylesheets --config config/postcss.config.js --dir _site/stylesheets/",
     "build:esbuild": "npx esbuild --bundle --outdir=_site/javascripts/ source/javascripts/*",
+    "build:postcss": "npx postcss source/stylesheets --config config/postcss.config.js --dir _site/stylesheets/",
     "clean": "rm -rf _site",
     "serve": "npm-run-all clean --parallel serve:*",
     "serve:eleventy": "npx @11ty/eleventy --serve",
-    "serve:postcss": "npx postcss source/stylesheets --config config/postcss.config.js --dir _site/stylesheets/ --watch",
-    "serve:esbuild": "npx esbuild --outdir=_site/javascripts/ --watch --sourcemap source/javascripts/*"
+    "serve:esbuild": "npx esbuild --outdir=_site/javascripts/ --watch --sourcemap source/javascripts/*",
+    "serve:postcss": "npx postcss source/stylesheets --config config/postcss.config.js --dir _site/stylesheets/ --watch"
   }
 }
