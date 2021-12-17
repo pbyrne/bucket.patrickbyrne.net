@@ -3,22 +3,23 @@
     "@11ty/eleventy": "^0.12.1",
     "airtable": "^0.11.1",
     "autoprefixer": "^10.4.0",
-    "esbuild": "^0.13.15",
-    "liquidjs": "^9.28.0",
+    "esbuild": "^0.14.5",
+    "liquidjs": "^9.29.0",
     "npm-run-all": "^4.1.5",
-    "postcss-cli": "^9.0.1",
-    "postcss-nesting": "^8.0.1",
-    "tailwindcss": "^2.2.19"
+    "postcss": "^8.4.5",
+    "postcss-cli": "^9.1.0",
+    "postcss-nesting": "^10.0.3",
+    "tailwindcss": "^3.0.7"
   },
   "scripts": {
     "build": "npm-run-all clean build:*",
     "build:eleventy": "npx @11ty/eleventy",
-    "build:postcss": "npx postcss source/stylesheets --config config/postcss.config.js --dir _site/stylesheets/",
     "build:esbuild": "npx esbuild --bundle --outdir=_site/javascripts/ source/javascripts/*",
+    "build:postcss": "npx postcss source/stylesheets --config config/postcss.config.js --dir _site/stylesheets/",
     "clean": "rm -rf _site",
     "serve": "npm-run-all clean --parallel serve:*",
     "serve:eleventy": "npx @11ty/eleventy --serve",
-    "serve:postcss": "npx postcss source/stylesheets --config config/postcss.config.js --dir _site/stylesheets/ --watch",
-    "serve:esbuild": "npx esbuild --outdir=_site/javascripts/ --watch --sourcemap source/javascripts/*"
+    "serve:esbuild": "npx esbuild --outdir=_site/javascripts/ --watch --sourcemap source/javascripts/*",
+    "serve:postcss": "npx postcss source/stylesheets --config config/postcss.config.js --dir _site/stylesheets/ --watch"
   }
 }
