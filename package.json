@@ -1,4 +1,16 @@
 {
+  "name": "bucket.patrickbyrne.net",
+  "description": "Source code powering my image bucket",
+  "homepage": "https://bucket.patrickbyrne.net",
+  "license": "See LICENSE file",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pbyrne/bucket.patrickbyrne.net.git"
+  },
+  "engines": {
+    "node": "~16.13.0",
+    "npm": "~8.1.2"
+  },
   "dependencies": {
     "@11ty/eleventy": "^1.0.0",
     "airtable": "^0.11.1",
