@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@11ty/eleventy": "^1.0.0",
-    "airtable": "^0.11.1",
+    "airtable": "^0.11.3",
     "autoprefixer": "^10.4.2",
     "esbuild": "^0.14.34",
     "liquidjs": "^9.34.0",
