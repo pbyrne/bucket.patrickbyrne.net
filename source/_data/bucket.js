@@ -1,26 +1,25 @@
-const Airtable = require("airtable");
+const EleventyFetch = require("@11ty/eleventy-fetch");
 
 class BucketImage {
-  #airtableRecord
+  #record
 
-  constructor(airtableRecord) {
-    this.airtableRecord = airtableRecord
+  constructor(record) {
+    this.record = record
   }
 
   get name() {
-    return this.airtableRecord.get("Name")
+    return this.record.fields.Name
   }
 
   get date() {
-    return new Date(this.airtableRecord.get("Date"))
+    return new Date(this.record.fields.Date)
   }
 
   get images() {
-    return this.airtableRecord.get("Image")
+    return this.record.fields.Image
   }
 
   get image() {
-    // console.log({this: this, name: this.name, images: this.images})
     return this.images[0] || {}
   }
 
@@ -48,53 +47,73 @@ class BucketImage {
     return this.image.type
   }
 }
+
 class Bucket {
-  #base
-  #client
+  #apiKey
   images = []
-  selectOptions = {
-    sort: [{field: "Name", direction: "asc"}],
-    // maxRecords: 20,
-  }
+  sortOptions = [{field: "Name", direction: "asc"}]
   tableName
 
-  constructor({tableName, selectOptions} = {}) {
-    this.client = new Airtable({apiKey: process.env.AIRTABLE_API_KEY})
-    this.base = this.client.base(process.env.AIRTABLE_BUCKET_BASE_ID)
+  constructor({tableName, sortOptions} = {}) {
+    this.apiKey = process.env.AIRTABLE_API_KEY
+    this.baseId = process.env.AIRTABLE_BUCKET_BASE_ID
     this.tableName = tableName
-    this.selectOptions = selectOptions || this.selectOptions
+    this.sortOptions = sortOptions || this.sortOptions
   }
 
-  async fetchResults() {
-    await this.base(this.tableName)
-      .select(this.selectOptions)
-      .eachPage((records, fetchNextPage) => {
-        console.log("Fetching a page from class", {
-          cumulativeCount: this.images.length,
-          pageCount: records.length,
-        })
-        records.forEach(record => {
-          // console.log({record: record, fields: record.fields})
-          this.images.push(new BucketImage(record))
-        })
-        fetchNextPage()
-      })
-      .then((maybeError) => {
-        if (maybeError) {
-          console.log("Error fetching images", maybeError)
-        }
-      })
+  get baseUrl() {
+    return `https://api.airtable.com/v0/${this.baseId}/${this.tableName}`
+  }
 
-    console.log("Done fetching images!", {finalCount: this.images.length})
+  queryUrl(offset) {
+    const url = new URL(this.baseUrl)
+    const searchParams = new URLSearchParams()
+
+    if (offset) {
+      searchParams.set("offset", offset)
+    }
+
+    this.sortOptions.forEach(({field, direction}, i) => {
+      searchParams.set(`sort[${i}][field]`, field)
+      searchParams.set(`sort[${i}][direction]`, direction)
+    })
+
+    url.search = searchParams.toString()
+
+    return url.toString()
+  }
+
+  async fetchPage(offset) {
+    return EleventyFetch(this.queryUrl(offset), {
+      duration: "1h",
+      fetchOptions: {
+        headers: {
+          Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}`,
+        }
+      },
+      type: "json",
+      verbose: true,
+    })
+  }
+
+  async fetchResults(offset) {
+    let response = await this.fetchPage(offset)
+
+    response.records.forEach(record => {
+      this.images.push(new BucketImage(record))
+    })
+
+    if (response.offset) {
+      await this.fetchResults(response.offset)
+    }
   }
 }
 
 fetchBucket = async function() {
-  // console.log("data function start")
+  console.log("Fetch starting…")
   bucket = new Bucket({tableName: "images"})
-  // console.log("data function initialize bucket", bucket)
   await bucket.fetchResults()
-  // console.log("data function fetched images", bucket.images.length)
+  console.log("Fetch complete!", {imageCount: bucket.images.length})
 
   return bucket
 }
