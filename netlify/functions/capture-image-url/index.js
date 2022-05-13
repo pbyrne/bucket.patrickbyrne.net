@@ -1,4 +1,4 @@
-const Bucket = require("../../lib/bucket.js")
+const Bucket = require("../../../lib/bucket.js")
 const bucket = new Bucket()
 
 async function addToBucket(event, context) {
