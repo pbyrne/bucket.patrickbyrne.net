@@ -1,7 +1,5 @@
-const Airtable = require("airtable");
-const base = new Airtable({apiKey: process.env.AIRTABLE_API_KEY})
-  .base(process.env.AIRTABLE_BUCKET_BASE_ID)
-const tableName = "images"
+const Bucket = require("../../../lib/bucket.js")
+const bucket = new Bucket()
 
 async function addToBucket(event, context) {
   // console.log({event, context})
@@ -11,30 +9,17 @@ async function addToBucket(event, context) {
     statusCode: 400,
     body: "Response not yet defined by handler",
   }
-  const payload = {
-    Name: name,
-    Image: [{
-      url: url,
-      filename: name,
-    }],
-    Date: today,
-  }
-  // console.log({name, url, today, payload})
 
-  await base(tableName).create(payload)
-    .then((record) => {
-      // console.log("In the `then`", {record})
+  await bucket.uploadImage({name: name, url: url, date: today})
+    .then((response) => {
       response.statusCode = 200
-      response.body = record.id
-      // console.log("Updated response to", {response})
+      response.body = response
     })
     .catch((error) => {
-      // console.log("In the `catch`", {error})
       response.statusCode = error.statusCode
       response.body = JSON.stringify(error)
     })
 
-  // console.log("Responding with", {response})
   return response
 }
 

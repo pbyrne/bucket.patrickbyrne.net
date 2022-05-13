@@ -7,4 +7,3 @@ module.exports = function(eleventyConfig) {
     dir: { input: "source", output: "_site" }
   };
 };
-
