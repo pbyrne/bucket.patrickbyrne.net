@@ -31,11 +31,13 @@ layout: layout
         </td>
 
         <td>
-          <img src="{{ image.thumbnail.url }}"
-               loading="lazy"
-               width="{{ image.thumbnail.width }}"
-               height="{{ image.thumbnail.height }}"
-               />
+          <a href="/{{ image.name }}">
+            <img src="{{ image.thumbnail.url }}"
+                 loading="lazy"
+                 width="{{ image.thumbnail.width }}"
+                 height="{{ image.thumbnail.height }}"
+                 />
+          </a>
         </td>
 
         <td>
