@@ -18,19 +18,19 @@ layout: layout
 <table class="images--container">
   <thead>
     <tr>
-      <th class="images--sort-trigger" data-sorted="asc">Name</th>
-      <th>Thumbnail</th>
-      <th class="images--sort-trigger">Date</th>
+      <th class="images--sort-trigger images--image-name" data-sorted="asc">Name</th>
+      <th class="images--image-thumbnail">Thumbnail</th>
+      <th class="images--sort-trigger images--image-date">Date</th>
     </tr>
   </thead>
   <tbody>
     {% for image in bucket.images %}
       <tr class="images--image" data-name="{{ image.name }}" data-type="{{ image.type }}">
-        <td>
+        <td class="images--image-name">
           <a href="/{{ image.name }}">{{ image.name }}</a>
         </td>
 
-        <td>
+        <td class="images--image-thumbnail">
           <a href="/{{ image.name }}">
             <img src="{{ image.thumbnail.url }}"
                  loading="lazy"
@@ -40,7 +40,7 @@ layout: layout
           </a>
         </td>
 
-        <td>
+        <td class="images--image-date">
           {{ image.date | date: "%Y-%m-%d" }}
         </td>
       </tr>

@@ -23,13 +23,38 @@
 .images--container {
   @apply m-4;
 
-  & th, & td {
-    @apply pr-1;
-    @apply pb-1;
+  & tr {
+    @apply flex;
+    @apply flex-wrap;
+    @apply justify-between;
+    @apply md:table-row;
+
+    @apply my-1.5;
+    @apply md:m-0;
+
+    & th, & td {
+      @apply block;
+      @apply md:table-cell;
+    }
+
+    & th.images--image-thumbnail {
+      @apply hidden;
+      @apply md:table-cell;
+    }
+
+    & td.images--image-name {
+      @apply basis-full;
+    }
   }
 
-
   & th {
+    @apply pb-1;
+    @apply pr-1;
     @apply text-left;
+  }
+
+  & td {
+    @apply pb-1;
+    @apply pr-1;
   }
 }
