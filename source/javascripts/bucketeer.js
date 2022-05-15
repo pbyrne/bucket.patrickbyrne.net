@@ -64,7 +64,7 @@ export default class Bucketeer {
     Array.from(this.images)
       .sort((row1, row2) => {
         // TODO use a data attibute instead of innerHTML?
-        const row1Value = row1.children.innerHTML.trim().toLowerCase()
+        const row1Value = row1.children[headingIndex].innerHTML.trim().toLowerCase()
         const row2Value = row2.children[headingIndex].innerHTML.trim().toLowerCase()
 
         if (row1Value > row2Value) {
