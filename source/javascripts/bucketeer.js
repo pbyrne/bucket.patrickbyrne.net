@@ -12,6 +12,7 @@ export default class Bucketeer {
 
     // event bindings
     this.filter.addEventListener("input", this.triggerFilter.bind(this))
+    this.filter.form.addEventListener("submit", this.triggerSubmit.bind(this))
     this.sorters.forEach((sorter) => {
       sorter.classList.add("cursor-pointer")
       sorter.addEventListener("click", this.triggerSort.bind(this))
@@ -39,8 +40,12 @@ export default class Bucketeer {
     this.filterBy(event.target.value)
   }
 
+  triggerSubmit(event) {
+    event.preventDefault()
+    this.queryValueFromURL = this.filter.value
+  }
+
   filterBy(value) {
-    this.queryValueFromURL = value
     const fuzzyFinder = this.fuzzyRegExp(value)
     this.images.forEach((image) => {
       const name = image.dataset.name
