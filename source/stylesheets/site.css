@@ -38,13 +38,9 @@
     @apply md:table-cell;
   }
 
-  & .images--image-thumbnail {
+  & .images--image-date {
     @apply hidden;
     @apply md:table-cell;
-  }
-
-  & .images--image-name {
-    @apply basis-full;
   }
 
   & th {
