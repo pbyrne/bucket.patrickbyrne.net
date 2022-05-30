@@ -46,9 +46,9 @@ export default class Bucketeer {
       const name = image.dataset.name
 
       if (name.match(fuzzyFinder)) {
-        image.classList.remove("hidden")
+        image.classList.remove("!hidden")
       } else {
-        image.classList.add("hidden")
+        image.classList.add("!hidden")
       }
     })
   }
