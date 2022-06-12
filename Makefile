@@ -12,4 +12,3 @@ clean: node_modules
 
 node_modules: package.json package-lock.json
 	npm install
-
