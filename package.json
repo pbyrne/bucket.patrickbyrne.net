@@ -16,7 +16,7 @@
     "@11ty/eleventy-fetch": "^3.0.0",
     "autoprefixer": "^10.4.7",
     "esbuild": "^0.14.48",
-    "liquidjs": "^9.37.0",
+    "liquidjs": "^9.38.0",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.14",
     "postcss-cli": "^9.1.0",
