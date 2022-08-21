@@ -12,7 +12,7 @@
     "npm": "~8.10.0"
   },
   "dependencies": {
-    "@11ty/eleventy": "^1.0.1",
+    "@11ty/eleventy": "^1.0.2",
     "@11ty/eleventy-fetch": "^3.0.0",
     "autoprefixer": "^10.4.8",
     "esbuild": "^0.14.54",
