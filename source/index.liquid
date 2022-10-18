@@ -25,8 +25,6 @@ layout: layout
   </thead>
   <tbody>
     {% for image in bucket.images %}
-      <pre>
-      </pre>
       <tr class="images--row images--image" data-name="{{ image.originalName }}" data-type="{{ image.originalType }}">
         <td class="images--image-name">
           <a href="/{{ image.originalName }}">{{ image.originalName }}</a>
