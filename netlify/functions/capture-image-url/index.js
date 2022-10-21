@@ -2,7 +2,6 @@ const Bucket = require("../../../lib/bucket.js")
 const bucket = new Bucket()
 
 async function addToBucket(event, context) {
-  // console.log({event, context})
   const {name, url} = JSON.parse(event.body)
   const [today] = (new Date()).toISOString().split("T")
   let response = {

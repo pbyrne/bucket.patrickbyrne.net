@@ -25,13 +25,13 @@ layout: layout
   </thead>
   <tbody>
     {% for image in bucket.images %}
-      <tr class="images--row images--image" data-name="{{ image.name }}" data-type="{{ image.type }}">
+      <tr class="images--row images--image" data-name="{{ image.originalName }}" data-type="{{ image.originalType }}">
         <td class="images--image-name">
-          <a href="/{{ image.name }}">{{ image.name }}</a>
+          <a href="/{{ image.originalName }}">{{ image.originalName }}</a>
         </td>
 
         <td class="images--image-thumbnail">
-          <a href="/{{ image.name }}">
+          <a href="/{{ image.originalName }}">
             <img src="{{ image.thumbnail.url }}"
                  loading="lazy"
                  width="{{ image.thumbnail.width }}"
