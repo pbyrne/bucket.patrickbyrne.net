@@ -1,7 +1,0 @@
----
-permalink: "_redirects"
----
-# Proxy sanitized filenames to the upload source location
-{% for image in bucket.images -%}
-{{ image.originalName }} {{ image.fullSize.url }} 200
-{% endfor -%}
