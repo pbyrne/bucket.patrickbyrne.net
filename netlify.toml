@@ -18,10 +18,10 @@ minify = false
 [build.processing.images]
 compress = true
 
-[[plugins]]
-package = "netlify-plugin-cache"
+# [[plugins]]
+# package = "netlify-plugin-cache"
 
-[plugins.inputs]
-paths = [
-  ".cache", # Eleventy Cache's base cache
-]
+# [plugins.inputs]
+# paths = [
+#   ".cache", # Eleventy Cache's base cache
+# ]
