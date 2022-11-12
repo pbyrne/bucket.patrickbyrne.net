@@ -2,7 +2,7 @@
 publish = "_site"
 
 [build.environment]
-NODE_VERSION = "16.4.0"
+NODE_VERSION = "18.12.1"
 
 [build.processing]
 skip_processing = false
@@ -18,10 +18,10 @@ minify = false
 [build.processing.images]
 compress = true
 
-[[plugins]]
-package = "netlify-plugin-cache"
+# [[plugins]]
+# package = "netlify-plugin-cache"
 
-[plugins.inputs]
-paths = [
-  ".cache", # Eleventy Cache's base cache
-]
+# [plugins.inputs]
+# paths = [
+#   ".cache", # Eleventy Cache's base cache
+# ]

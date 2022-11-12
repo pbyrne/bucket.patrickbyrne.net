@@ -8,8 +8,8 @@
     "url": "https://github.com/pbyrne/bucket.patrickbyrne.net.git"
   },
   "engines": {
-    "node": "~16.15.0",
-    "npm": "~8.10.0"
+    "node": "~18.12.1",
+    "npm": "~8.19.2"
   },
   "dependencies": {
     "@11ty/eleventy": "^1.0.2",
