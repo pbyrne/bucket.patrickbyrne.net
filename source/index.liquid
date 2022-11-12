@@ -27,7 +27,7 @@ layout: layout
     {% for image in bucket.images %}
       <tr class="images--row images--image" data-name="{{ image.name }}" data-type="{{ image.type }}">
         <td class="images--image-name">
-          <a href="{{ image.original.url }}">{{ image.original.name }}</a>
+          <a href="{{ image.original.url }}">{{ image.name }}</a>
         </td>
 
         <td class="images--image-thumbnail">
