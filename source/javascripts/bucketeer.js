@@ -14,7 +14,6 @@ export default class Bucketeer {
     this.filter.addEventListener("input", this.triggerFilter.bind(this))
     this.filter.form.addEventListener("submit", this.triggerSubmit.bind(this))
     this.sorters.forEach((sorter) => {
-      sorter.classList.add("cursor-pointer")
       sorter.addEventListener("click", this.triggerSort.bind(this))
     })
 
@@ -22,7 +21,7 @@ export default class Bucketeer {
     this.filter.form.classList.remove("invisible")
     if (this.defaultQueryValue) {
       this.filter.value = this.defaultQueryValue
-      this.filter.dispatchEvent(new Event("input")) // TODO: Understand why `.value=` doesn't trigger change event
+      this.filter.dispatchEvent(new Event("input")) // Assigning `value=` doesn't trigger this event
     }
   }
 
@@ -51,9 +50,9 @@ export default class Bucketeer {
       const name = image.dataset.name
 
       if (name.match(fuzzyFinder)) {
-        image.classList.remove("!hidden")
+        image.classList.remove("hidden")
       } else {
-        image.classList.add("!hidden")
+        image.classList.add("hidden")
       }
     })
   }

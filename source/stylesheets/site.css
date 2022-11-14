@@ -11,7 +11,7 @@ fieldset {
   padding: 0;
 }
 
-.cursor-pointer {
+.images--sort-trigger {
   cursor: pointer;
 }
 
@@ -88,3 +88,12 @@ th {
     display: table-cell;
   }
 }
+
+.invisible {
+  visibility: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
