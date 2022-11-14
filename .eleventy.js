@@ -1,8 +1,6 @@
 module.exports = function(eleventyConfig) {
-  eleventyConfig.addWatchTarget("./config/")
-  eleventyConfig.addWatchTarget("./source/javascripts/")
-
   eleventyConfig.addPassthroughCopy("./source/stylesheets")
+  eleventyConfig.addPassthroughCopy("./source/javascripts/")
 
   return {
     dir: { input: "source", output: "_site" }

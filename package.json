@@ -14,18 +14,11 @@
   "dependencies": {
     "@11ty/eleventy": "^1.0.2",
     "@11ty/eleventy-fetch": "^3.0.0",
-    "autoprefixer": "^10.4.13",
-    "esbuild": "^0.14.54",
-    "liquidjs": "^9.42.1",
-    "npm-run-all": "^4.1.5"
+    "liquidjs": "^9.42.1"
   },
   "scripts": {
-    "build": "npm-run-all clean build:*",
-    "build:eleventy": "npx @11ty/eleventy",
-    "build:esbuild": "npx esbuild --bundle --outdir=_site/javascripts/ source/javascripts/*",
+    "build": "npx @11ty/eleventy",
     "clean": "rm -rf _site",
-    "serve": "npm-run-all clean --parallel serve:*",
-    "serve:eleventy": "npx @11ty/eleventy --serve",
-    "serve:esbuild": "npx esbuild --outdir=_site/javascripts/ --watch --sourcemap source/javascripts/*"
+    "serve": "npx @11ty/eleventy --serve"
   }
 }
