@@ -4,14 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{{ title | default: "Bucket" }}</title>
-    <link rel="stylesheet" href="/stylesheets/site.css" />
-    <script src="/javascripts/site.js" type="module"></script>
+    <title @html="title || 'Bucket'"></title>
+    <link webc:keep rel="stylesheet" href="/stylesheets/site.css" />
+    <script webc:keep src="/javascripts/site.js" type="module"></script>
   </head>
 
   <body>
-    <main>
-      {{ content }}
-    </main>
+    <main @raw="content"></main>
   </body>
 </html>

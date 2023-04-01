@@ -1,0 +1,36 @@
+---
+layout: layout
+---
+
+<form class="images--filter invisible">
+  <fieldset>
+    <label for="filter" class="images--filter-label">Filter images</label>
+    <input class="images--filter-input" data-action="filter" id="filter" name="filter" placeholder="Filter images"/>
+  </fieldset>
+</form>
+
+<table class="images--container">
+  <thead>
+    <tr class="images--row">
+      <th class="images--sort-trigger images--image-name" data-sorted="asc">Name</th>
+      <th class="images--image-thumbnail">Thumbnail</th>
+      <th class="images--sort-trigger images--image-date">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr webc:for="image of bucket.images" class="images--row images--image" :data-name="image.name" :data-type="image.type" :data-type-two="type">
+      <td class="images--image-name">
+        <a :href="image.original.url" @text="image.name"></a>
+      </td>
+
+      <td class="images--image-thumbnail">
+        <a :href="image.original.url">
+          <img :src="image.thumbnail.url" loading="lazy" :width="image.thumbnail.width" :height="image.thumbnail.height"/>
+        </a>
+      </td>
+
+      <td class="images--image-date" @text="image.date">
+      </td>
+    </tr>
+  </tbody>
+</table>
