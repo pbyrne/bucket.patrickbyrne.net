@@ -1,6 +1,6 @@
 const EleventyFetch = require("@11ty/eleventy-fetch")
 
-class OriginalImage {
+class ThumbnailImage {
   data() {
     return {
       pagination: {
@@ -20,5 +20,4 @@ class OriginalImage {
   }
 }
 
-module.exports = OriginalImage
-
+module.exports = ThumbnailImage
