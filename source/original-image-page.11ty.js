@@ -9,7 +9,7 @@ class OriginalImage {
         size: 1,
       },
       permalink: (ctx) => {
-        return ctx.image.original.path
+        return `public/${ctx.image.original.path}`
       },
     }
   }
