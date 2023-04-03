@@ -12,22 +12,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(EleventyVitePlugin, {
     viteOptions: {
       build: {
-        assetsInlineLimit: 0, // Don't inline assets
-        rollupOptions: {
-          output: {
-            assetFileNames: (assetInfo) => {
-              if (assetInfo.name?.match(/\.(jpg|gif|png)$/)) {
-                console.log(`#assetFileNames: ${assetInfo.name} keep as-is`)
-                // keep images as-is (e.g., `/example.gif` because they're deep-linked to elsewhere
-                return "[name][extname]"
-              } else {
-                console.log(`#assetFileNames: ${assetInfo.name} put in assets`)
-                // otherwise use the default behavior
-                return "assets/[name]-[hash][extname]"
-              }
-            },
-          },
-        },
+        assetsInlineLimit: 0, // Don't inline assets, since we want to keep the markup small
       },
     },
   })
