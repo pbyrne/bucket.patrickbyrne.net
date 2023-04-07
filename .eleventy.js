@@ -13,9 +13,14 @@ module.exports = function(eleventyConfig) {
     viteOptions: {
       build: {
         assetsInlineLimit: 0, // Don't inline assets, since we want to keep the markup small
+        manifest: true,
       },
     },
   })
+
+  eleventyConfig.addGlobalData("filesDomain", "https://bucket-files.byrne.team")
+  eleventyConfig.addGlobalData("deployDomain", "https://bucket.patrickbyrne.net")
+  eleventyConfig.addGlobalData("sourceJSON", "https://bucket-files.byrne.team/bucket.json")
 
   return {
     dir: { input: "source", output: "_site" }
