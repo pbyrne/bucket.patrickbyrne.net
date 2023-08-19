@@ -2,7 +2,7 @@
 publish = "_site"
 
 [build.environment]
-NODE_VERSION = "18.15.0"
+NODE_VERSION = "18.17.1"
 
 [build.processing]
 skip_processing = false
