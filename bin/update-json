@@ -1,0 +1,59 @@
+#!/usr/bin/env ruby
+
+require "json"
+require "pathname"
+
+EXIT_MISSING_ENV=10
+EXIT_UNABLE_TO_IDENTIFY=11
+
+ENV.fetch("FILES_BASE") do
+  puts "Missing environment variables. Remember to source .env before running this script."
+  exit EXIT_MISSING_ENV
+end
+
+bucket_json_file = Pathname.new(ENV.fetch("FILES_BASE")).join("bucket.json")
+bucket_hash = JSON.load_file(bucket_json_file)
+
+class Dimension
+  attr_reader :width, :height
+
+  def initialize(width:, height:)
+    @width = width
+    @height = height
+  end
+end
+
+def dimensions_of(path)
+  result = %x{magick identify -format "%wx%h" #{path}[0]}
+
+  if $?.success?
+    width, height = result.split("x").map(&:to_i)
+    Dimension.new(width: width, height: height)
+  else
+    puts "Error getting dimensions of #{path}:"
+    puts result
+    exit EXIT_UNABLE_TO_IDENTIFY
+  end
+end
+
+base = Pathname.new(ENV.fetch("FILES_BASE"))
+originals = Pathname.new(ENV.fetch("ORIGINALS_BASE")).glob("*")
+originals.each do |original|
+  image_hash = bucket_hash.fetch("images").fetch(original.basename.to_s)
+  dimensions = dimensions_of(original)
+  image_hash["width"] = dimensions.width
+  image_hash["height"] = dimensions.height
+
+  thumb = Pathname.new(ENV.fetch("THUMBNAILS_BASE")).join(original.basename)
+  thumb_dimensions = dimensions_of(thumb)
+  image_hash.fetch("thumbnails")["w#{ENV.fetch("THUMBNAIL_SIZE")}"] = {
+    width: thumb_dimensions.width,
+    height: thumb_dimensions.height,
+    path: thumb.relative_path_from(base),
+  }
+end
+
+bucket_json_file.open("w+") do |file|
+  file.write(JSON.pretty_generate(bucket_hash))
+  file.puts # Because JSON.pretty_generate doesn't seem to put the trailing newline text files should have
+end
