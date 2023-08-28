@@ -12,6 +12,16 @@ Usage
 Misc
 ----
 
+### Generating thumbnails
+
+To optimize build times, particularly since the images don't change much over time, generate the thumbnails ahead of time instead of when building. Where and how these are stored is a distinct concern from generating the markup (at time of writing, they're stored in a WebDAV instance I have handy) so this operates against a local sync which isn't checked into the repo at `tmp/files/` with structure like so:
+
+- tmp/files/bucket.json: The JSON metadata about all the files it knows about.
+- tmp/files/original/: All the originals in a flat list.
+- tmp/files/thumbs/: Thumbnails will be stored here as `{width}/{original_filename}`.
+
+Run `bin/generate-thumbnails` to loop over the originals and generate thumbnails for each (using gifsicle for GIFs and ImageMagick for the rest). Run `bin/update-json` to add its data to the JSON used to build the site. Pushing those files to permanent storage is left as an exercise for the reader.
+
 ### One-time import
 
 The assets were historically stored in Airtable, capturing the datestamp and relying on the Airtable-provided thumbnails as a convenience. Now, they're stored in a WebDAV volume with thumbnails I generate myself and additional image metadata stored in JSON. Data was seeded from the version of the site built from the Airtable data, like so:

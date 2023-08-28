@@ -1,0 +1,33 @@
+#!/bin/bash
+
+set -e
+source .env
+
+if [ ! -d "$FILES_BASE" ]; then
+  echo "Nothing in $FILES_BASE. Halting."
+  exit 1
+fi
+
+if [ ! -d "$ORIGINALS_BASE" ]; then
+  echo "Original files not in $ORIGINALS_BASE. Halting"
+  exit 1
+fi
+
+mkdir -p $THUMBNAILS_BASE
+
+for file in $(ls $ORIGINALS_BASE); do
+  extension="${file##*.}"
+  echo "Resizing ${file} (as ${extension}) …"
+
+  case $extension in
+    "gif")
+      echo "  using gifsicle."
+      gifsicle --resize-fit "${THUMBNAIL_SIZE}x${THUMBNAIL_SIZE}" --resize-method sample $ORIGINALS_BASE/$file > $THUMBNAILS_BASE/$file
+      ;;
+    *)
+      echo "  using magick"
+      magick convert $ORIGINALS_BASE/$file -resize "${THUMBNAIL_SIZE}x${THUMBNAIL_SIZE}" -coalesce $THUMBNAILS_BASE/$file
+  esac
+done
+
+echo "Done!"

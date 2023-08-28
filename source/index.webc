@@ -25,7 +25,7 @@ layout: layout
 
       <td class="images--image-thumbnail">
         <a :href="image.original.url">
-          <img :src="image.thumbnail.url" loading="lazy" :width="image.thumbnail.width" :height="image.thumbnail.height"/>
+          <img :src="image.thumbnail.url" loading="lazy" :width="image.thumbnail.width / 2" :height="image.thumbnail.height / 2"/>
         </a>
       </td>
 
