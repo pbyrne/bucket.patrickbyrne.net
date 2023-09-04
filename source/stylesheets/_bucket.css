@@ -1,0 +1,28 @@
+.images--filter-input {
+  font-size: 100%;
+  width: 100%;
+}
+
+.images--container {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(40px, 80px));
+  list-style-type: none;
+  padding: 0;
+}
+
+.images--image {
+}
+
+.images--image-thumb {
+  max-height: 1fr;
+  max-width: 1fr;
+}
+
+.images--image-name {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
