@@ -15,8 +15,8 @@
 }
 
 .images--image-thumb {
-  max-height: 1fr;
-  max-width: 1fr;
+  max-height: 80px;
+  max-width: 80px;
 }
 
 .images--image-name {
