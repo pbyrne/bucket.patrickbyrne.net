@@ -18,9 +18,9 @@ module.exports = function(eleventyConfig) {
     },
   })
 
-  eleventyConfig.addGlobalData("filesDomain", "https://bucket-files.byrne.team")
-  eleventyConfig.addGlobalData("deployDomain", "https://bucket.patrickbyrne.net")
-  eleventyConfig.addGlobalData("sourceJSON", "https://bucket-files.byrne.team/bucket.json")
+  eleventyConfig.addGlobalData("filesDomain", process.env.FILES_DOMAIN)
+  eleventyConfig.addGlobalData("deployDomain", process.env.DEPLOY_DOMAIN)
+  eleventyConfig.addGlobalData("sourceJSON", process.env.DATA_JSON_URL)
 
   return {
     dir: { input: "source", output: "_site" }

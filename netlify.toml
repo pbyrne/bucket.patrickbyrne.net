@@ -3,3 +3,8 @@ publish = "_site"
 
 [build.environment]
 NODE_VERSION = "18.17.1"
+
+[dev]
+command = "make serve"
+port = 8000
+targetPort = 8080

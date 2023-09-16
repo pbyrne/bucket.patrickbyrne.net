@@ -12,8 +12,8 @@ layout: layout
 <ul class="images--container">
   <li webc:for="image of bucket.images" class="images--image" :data-name="image.name" :data-type="image.type">
     <a class="images--image-link" :href="image.original.url">
+      <img class="images--image-thumb" :src="image.still.url" loading="lazy"/>
       <span class="images--image-name" @text="image.name"></span>
-      <img class="images--image-thumb" :src="image.thumbnail.url" loading="lazy"/>
     </a>
   </li>
 </ul>

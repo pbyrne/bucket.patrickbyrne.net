@@ -46,10 +46,19 @@ originals.each do |original|
 
   thumb = Pathname.new(ENV.fetch("THUMBNAILS_BASE")).join(original.basename)
   thumb_dimensions = dimensions_of(thumb)
-  image_hash.fetch("thumbnails")["w#{ENV.fetch("THUMBNAIL_SIZE")}"] = {
+  image_hash.delete("thumbnails")
+  image_hash["thumbnail"] = {
     width: thumb_dimensions.width,
     height: thumb_dimensions.height,
     path: thumb.relative_path_from(base),
+  }
+
+  still = Pathname.new(ENV.fetch("STILL_CROPS_BASE")).join(original.basename)
+  still_dimensions = dimensions_of(still)
+  image_hash["still"] = {
+    width: still_dimensions.width,
+    height: still_dimensions.height,
+    path: still.relative_path_from(base),
   }
 end
 

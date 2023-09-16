@@ -12,6 +12,7 @@ class Redirects {
     const redirects = []
     data.bucket.images.map((image) => {
       redirects.push(`/${image.original.url} ${data.filesDomain}/${image.original.source} 200`)
+      redirects.push(`/${image.still.url} ${data.filesDomain}/${image.still.source} 200`)
       redirects.push(`/${image.thumbnail.url} ${data.filesDomain}/${image.thumbnail.source} 200`)
       // TODO aliases (for renaming to keep respecting the old URL)
     })

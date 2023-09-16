@@ -14,6 +14,7 @@ if [ ! -d "$ORIGINALS_BASE" ]; then
 fi
 
 mkdir -p $THUMBNAILS_BASE
+mkdir -p $STILL_CROPS_BASE
 
 for file in $(ls $ORIGINALS_BASE); do
   extension="${file##*.}"
@@ -26,8 +27,11 @@ for file in $(ls $ORIGINALS_BASE); do
       ;;
     *)
       echo "  using magick"
-      magick convert $ORIGINALS_BASE/$file -resize "${THUMBNAIL_SIZE}x${THUMBNAIL_SIZE}" -coalesce $THUMBNAILS_BASE/$file
+      magick convert $ORIGINALS_BASE/$file -resize "${THUMBNAIL_SIZE}x${THUMBNAIL_SIZE}" $THUMBNAILS_BASE/$file
   esac
+
+  echo "Generating ${file} still crop…"
+  magick convert "$ORIGINALS_BASE/$file[0]" -resize "${THUMBNAIL_SIZE}x${THUMBNAIL_SIZE}^" -extent "${THUMBNAIL_SIZE}x${THUMBNAIL_SIZE}" -gravity center $STILL_CROPS_BASE/$file
 done
 
 echo "Done!"
