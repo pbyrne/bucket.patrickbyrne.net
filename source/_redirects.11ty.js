@@ -2,7 +2,7 @@ class Redirects {
   data() {
     return {
       permalink: (data) => {
-        return "_redirects"
+        return "public/_redirects"
       },
     }
   }
