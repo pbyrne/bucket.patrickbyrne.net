@@ -1,3 +1,9 @@
+:root {
+  --thumb-width: 135px;
+  --color-overlay-background: #fff;
+  --color-overlay-copy: #333;
+}
+
 .images--filter-input {
   font-size: 100%;
   width: 100%;
@@ -6,23 +12,50 @@
 .images--container {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(40px, 80px));
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--thumb-width) / 2), var(--thumb-width)));
   list-style-type: none;
   padding: 0;
 }
 
 .images--image {
+  position: relative;
 }
 
+.images--image[data-type="image/gif"]::after {
+  background: gray;
+  border-radius: 0.25rem;
+  color: white;
+  content: "GIF";
+  font-size: 0.5rem;
+  left: 0.25rem;
+  padding: 0.25rem;
+  position: absolute;
+  top: 0.25rem;
+}
+
+
 .images--image-thumb {
-  max-height: 80px;
-  max-width: 80px;
+  max-height: var(--thumb-width);
+  max-width: var(--thumb-width);
 }
 
 .images--image-name {
+  background-color: var(--color-overlay-background);
+  color: var(--color-overlay-copy);
   display: block;
+  height: 100%;
+  opacity: 0;
   overflow: hidden;
+  position: absolute;
   text-overflow: ellipsis;
+  top: 0;
+  visibility: hidden;
   white-space: nowrap;
   width: 100%;
+}
+
+.images--image:hover .images--image-name {
+  transition: opacity 0.5s;
+  opacity: 0.6;
+  visibility: visible;
 }

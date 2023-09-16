@@ -2,7 +2,7 @@ class BucketJSON {
   data() {
     return {
       permalink: (data) => {
-        return "public/images.json"
+        return "images.json"
       },
     }
   }
