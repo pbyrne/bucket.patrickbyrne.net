@@ -12,7 +12,8 @@ class BucketJSON {
     const imageArray = data.bucket.images.map((image) => {
       return {
         name: image.name,
-        url: `${data.deployDomain}/${image.original.path}`,
+        url: `${data.deployDomain}/${image.url}`,
+        thumbnail: `${data.deployDomain}/${image.thumbnail}`,
       }
     })
     return JSON.stringify(imageArray)
