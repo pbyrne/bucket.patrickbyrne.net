@@ -2,7 +2,7 @@
 publish = "_site"
 
 [build.environment]
-NODE_VERSION = "18.17.1"
+NODE_VERSION = "20.18.0"
 
 [dev]
 command = "make serve"
