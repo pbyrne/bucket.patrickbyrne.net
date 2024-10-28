@@ -1,5 +1,6 @@
 const EleventyWebcPlugin = require("@11ty/eleventy-plugin-webc");
 const EleventyVitePlugin = require("@11ty/eleventy-plugin-vite");
+const UpgradeHelper = require("@11ty/eleventy-upgrade-help");
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addWatchTarget("./config/")
@@ -17,6 +18,7 @@ module.exports = function(eleventyConfig) {
       },
     },
   })
+  eleventyConfig.addPlugin(UpgradeHelper);
 
   eleventyConfig.addGlobalData("filesDomain", process.env.FILES_DOMAIN)
   eleventyConfig.addGlobalData("deployDomain", process.env.DEPLOY_DOMAIN)
