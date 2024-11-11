@@ -14,7 +14,7 @@
   "dependencies": {
     "@11ty/eleventy": "^2.0.1",
     "@11ty/eleventy-fetch": "^4.0.1",
-    "@11ty/eleventy-plugin-vite": "^4.0.0",
+    "@11ty/eleventy-plugin-vite": "^5.0.1",
     "@11ty/eleventy-plugin-webc": "^0.11.2"
   },
   "scripts": {
